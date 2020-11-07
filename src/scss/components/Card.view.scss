@@ -1,0 +1,88 @@
+@import "../constants/font.scss";
+@import "../constants/color.scss";
+
+.card-cat {
+    position: relative;
+    border-radius: 6px;
+    background-color: $white;
+    margin: 16px;
+    margin-bottom: 8px;
+    margin-top: 4px;
+    box-shadow: 1px 2px 10px #eee, -1px -2px 10px #eee;    cursor: pointer;
+    width: 17%;
+    height: 200px;
+    transition: all .3s ease;
+    @media (min-width: 1600px) {
+        height: 200px;
+    }
+    @media (max-width: 1199px) {
+        height: 200px;
+        width: 16%;
+    }
+    @media (max-width: 991px) {
+        height: 200px;
+        width: 28%;
+    }
+    @media (max-width: 767px) {
+        width: 100%;
+        height: 200px;
+    }
+    .card-body {
+        flex: 1 1 auto;
+        min-height: 1px;
+        padding: 1.25rem;
+        img {
+            height: 100px;
+            width: 100px;
+        }
+        .name-wrap {
+            text-align: center;
+            display: table;
+            height: 24px;
+            width: 100%;
+            margin-top: 6px;
+            .cat-name-display {
+                color: #7a8595;
+                font-weight: 700;
+                font-size: 15px;
+                font-family: nunito;
+                height: 34px;
+                width: 120px;
+            }
+        }
+        .name-wrap > h4 {
+            display: table-cell;
+            vertical-align: middle;
+        }
+    }
+    .card-footer {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        height: 30px;
+        border-radius: 0 0 6px 6px;
+        padding: .75rem 1.25rem;
+        background-color: rgba(0,0,0,.03);
+        border-top: 1px solid rgba(0,0,0,.125);
+        .gender-indication {
+            text-align: center;
+            color: #fff;
+            margin-top: -3px;
+            font-size: 10px;
+            font-family: nunito;
+        }
+    }
+    .footer-female {
+        background-color: #f180ec;
+    }
+    .footer-male {
+        background-color: #74d3f0;
+    }
+    .footer-unknown {
+        background-color: #9affd8;
+    }
+}
+
+.card-cat:hover {
+    box-shadow: 0 1px 2px rgba(0,0,0,.37);
+}

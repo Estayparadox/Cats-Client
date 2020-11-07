@@ -1,0 +1,33 @@
+@import "../constants/font.scss";
+@import "../constants/color.scss";
+
+.pager {
+    padding-left: 0;
+    margin: 20px 0;
+    list-style: none;
+    text-align: center;
+    font-size: 14px;
+    font-family: nunito;
+    li {
+        display: inline;
+    }
+    li > a {
+        color: $dark-blue !important;
+        display: inline-block;
+        padding: 5px 14px;
+        background-color: $white;
+        border: 1px solid #dddddd;
+        border-radius: 15px;
+        font-family: nunito;
+    }
+    li.disabled > a {
+        color: grey !important;
+        cursor: not-allowed;
+    }
+    .previous > a {
+        float: left;
+    }
+    .next > a {
+        float: right;
+    }
+}
