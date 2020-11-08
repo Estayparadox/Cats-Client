@@ -4,7 +4,6 @@ import { getCats } from "../services/Cat.service";
 import View from "./Cats.view";
 import PropType from 'prop-types';
 import { BrowserRouter as Router, Route, Link, Redirect } from "react-router-dom";
-import CatInformationContainer from "./CatInformation.container";
 
 interface IStateCatsContainer {
     cats: ICat[];

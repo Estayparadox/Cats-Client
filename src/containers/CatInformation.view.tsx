@@ -5,19 +5,21 @@ import "../scss/containers/CatInformation.view.scss";
 interface IPropsCatInformationView {
     cat: ICat;
 }
-
 class CatInformationView extends Component<IPropsCatInformationView> {
     constructor(props: IPropsCatInformationView) {
         super(props);
     }
 
+    handleBack() {
+        window.location.assign("/cats");
+    }
+
     render(): JSX.Element {
-        console.log(this.props.cat)
         return (
             <>
                 <button 
                     className="btn back-button" 
-                    onClick={() => {}}>
+                    onClick={this.handleBack}>
                     Back
                 </button>
                 <div className={"cat-information"}>
