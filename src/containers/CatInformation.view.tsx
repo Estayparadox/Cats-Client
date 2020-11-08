@@ -14,24 +14,39 @@ class CatInformationView extends Component<IPropsCatInformationView> {
         window.location.assign("/cats");
     }
 
-    render(): JSX.Element {
-        let genderBack: string = "";
-        let genderFront: string = "";
-        switch (this.props.cat.gender) {
-            case "Male":
-                genderBack = "male-back";
-                genderFront = "male-front";
-                break;
-            case "Female":
-                genderBack = "female-back";
-                genderFront = "female-front";
-                break;
-            default:
-                genderBack = "neutral-back";
-                genderFront = "neutral-front";
+    getAgeFromBirthdate(birthdate: string): string {
+        var catBirthdate = new Date(birthdate);
+        let timeDiff = Math.abs(Date.now() - catBirthdate.getTime());
+        let age = Math.floor((timeDiff / (1000 * 3600 * 24))/365.25);
+        return `(` + age.toString() + `yo)`;
+    }
 
-                break;
+    getCssStyleForBackground(gender: string): string {
+        switch (gender) {
+            case "Male":
+                return "male-back";
+            case "Female":
+                return "female-back";
+            default:
+                return "neutral-back";
         }
+    }
+
+    getCssStyleForColor(gender: string): string {
+        switch (gender) {
+            case "Male":
+                return "male-front";
+            case "Female":
+                return "female-front";
+            default:
+                return "neutral-front";
+        }
+    }
+
+    render(): JSX.Element {
+        const genderBack = this.getCssStyleForBackground(this.props.cat.gender);
+        const genderFront = this.getCssStyleForColor(this.props.cat.gender);
+        const age = this.getAgeFromBirthdate(this.props.cat.birthdate);
 
         return (
             <>
@@ -54,7 +69,7 @@ class CatInformationView extends Component<IPropsCatInformationView> {
                         <div className={"information-container"}>
                             <h2 className={`${genderFront}`}>{this.props.cat.name}</h2>
                             <div className={"information"}>
-                                <h3>Birthdate: {this.props.cat.birthdate}</h3>
+                                <h3>Birthdate: {this.props.cat.birthdate} {age}</h3>
                                 <h3>Gender: {this.props.cat.gender}</h3>
                                 <h3>Breed: {this.props.cat.breed}</h3>
                             </div>
