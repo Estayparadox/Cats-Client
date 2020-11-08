@@ -2,6 +2,9 @@ import React, { Component } from "react";
 import { ICat } from "../models/cat";
 import { getCats } from "../services/Cat.service";
 import View from "./Cats.view";
+import PropType from 'prop-types';
+import { BrowserRouter as Router, Route, Link, Redirect } from "react-router-dom";
+import CatInformationContainer from "./CatInformation.container";
 
 interface IStateCatsContainer {
     cats: ICat[];
@@ -9,11 +12,17 @@ interface IStateCatsContainer {
     pageNumber: number;
     catCount: number
     maximumOfElementsToBeDisplay: number;
+    redirect: boolean;
+    selectedCat: ICat;
 }
 
 interface IPropsCatsContainer {}
 
 class CatsContainer extends Component<IPropsCatsContainer, IStateCatsContainer> {
+    static contextTypes = { 
+        router: PropType.object 
+    } 
+    
     constructor(props: IPropsCatsContainer) {
         super(props);
 
@@ -22,12 +31,29 @@ class CatsContainer extends Component<IPropsCatsContainer, IStateCatsContainer> 
             isLoading: false,
             pageNumber: 1,
             catCount: 0,
-            maximumOfElementsToBeDisplay: 30
+            maximumOfElementsToBeDisplay: 30,
+            redirect: false,
+            selectedCat: {
+                id: -1,
+                name: "",
+                birthdate: "",
+                breed: "",
+                location: "",
+                gender: "",
+                picturePath: ""
+            }
         };
     }
 
     async componentDidMount(): Promise<void> {
         await this.fetchCats();
+    }
+
+    handleClickOnCat(cat: ICat) {
+        this.setState({
+            redirect: true,
+            selectedCat: cat
+        })
     }
 
     async fetchCats(): Promise<void> {
@@ -50,10 +76,16 @@ class CatsContainer extends Component<IPropsCatsContainer, IStateCatsContainer> 
     }
 
     render(): JSX.Element {
+        if (this.state.redirect) {
+            return <Redirect to={{
+                pathname: '/information',
+                state: { cat: this.state.selectedCat },
+            }} />
+        } else {
         return (
             <View
                 cats={this.state.cats}
-                handleClickOnCat={()=>{}}
+                handleClickOnCat={this.handleClickOnCat.bind(this)}
                 isLoading={this.state.isLoading}
                 handleClickNext={()=>{}}
                 handleClickPrevious={()=>{}}
@@ -62,6 +94,7 @@ class CatsContainer extends Component<IPropsCatsContainer, IStateCatsContainer> 
                 maximumOfElementsToBeDisplay={this.state.maximumOfElementsToBeDisplay}
             />
         );
+        }
     }
 }
 

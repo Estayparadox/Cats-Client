@@ -12,6 +12,7 @@ class CardComponent extends Component<IPropsCardComponent> {
     constructor(props: IPropsCardComponent) {
         super(props);
     }
+    
     render(): JSX.Element {
         let title = `${this.props.cat.name.toUpperCase()}`;
         title = typeof this.props.cat.name !== "undefined" ? title : "";

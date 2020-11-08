@@ -4,7 +4,7 @@ import CardComponent from "../Card/Card.component";
 import "../../scss/components/CardList.view.scss";
 
 interface IPropsCardListComponent  {
-  handleClickOnCat?: (cat: ICat) => void;
+  handleClickOnCat: (cat: ICat) => void;
   cats: ICat[];
 }
 
@@ -13,10 +13,6 @@ interface IStateCardListComponent {}
 class CardListComponent extends Component<IPropsCardListComponent, IStateCardListComponent> {
   constructor(props: IPropsCardListComponent) {
     super(props);
-  }
-
-  handleClickOnCat(cat: ICat): void {
-    return;
   }
 
   render(): JSX.Element {
@@ -29,7 +25,7 @@ class CardListComponent extends Component<IPropsCardListComponent, IStateCardLis
                     <CardComponent
                         key={cat.id}
                         cat={cat}
-                        handleClickOnCat={this.handleClickOnCat}
+                        handleClickOnCat={this.props.handleClickOnCat}
                     />
                   );
                 })}
