@@ -26,6 +26,7 @@ class CatInformationView extends Component<IPropsCatInformationView> {
                     <div className={"left-part"}>
                         <div className={"img-container"}>
                             <img
+                                className={"rounded-circle white-background border-white"}
                                 src={this.props.cat.picturePath}
                                 alt="cat picture"
                             />
