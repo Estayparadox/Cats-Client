@@ -15,6 +15,24 @@ class CatInformationView extends Component<IPropsCatInformationView> {
     }
 
     render(): JSX.Element {
+        let genderBack: string = "";
+        let genderFront: string = "";
+        switch (this.props.cat.gender) {
+            case "Male":
+                genderBack = "male-back";
+                genderFront = "male-front";
+                break;
+            case "Female":
+                genderBack = "female-back";
+                genderFront = "female-front";
+                break;
+            default:
+                genderBack = "neutral-back";
+                genderFront = "neutral-front";
+
+                break;
+        }
+
         return (
             <>
                 <button 
@@ -34,14 +52,14 @@ class CatInformationView extends Component<IPropsCatInformationView> {
                     </div>
                     <div className={"right-part"}>
                         <div className={"information-container"}>
-                            <h2>{this.props.cat.name}</h2>
+                            <h2 className={`${genderFront}`}>{this.props.cat.name}</h2>
                             <div className={"information"}>
                                 <h3>Birthdate: {this.props.cat.birthdate}</h3>
                                 <h3>Gender: {this.props.cat.gender}</h3>
                                 <h3>Breed: {this.props.cat.breed}</h3>
                             </div>
                             <button 
-                                className="btn btn-custom" 
+                                className={`btn btn-custom ${genderBack}`}
                                 onClick={() => {}}>
                                 Make an appointment to adopt
                             </button>
