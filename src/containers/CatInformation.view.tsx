@@ -1,16 +1,46 @@
 import React, { Component } from 'react';
 import { ICat } from '../models/cat';
+import { Modal } from "react-bootstrap";
 import "../scss/containers/CatInformation.view.scss";
 
 interface IPropsCatInformationView {
     cat: ICat;
 }
+
 class CatInformationView extends Component<IPropsCatInformationView> {
+    state = {
+        show: false
+    };
+    
     constructor(props: IPropsCatInformationView) {
         super(props);
+        
+        this.handleShow.bind(this);
+        this.handleHide.bind(this);
     }
 
-    handleBack() {
+    componentDidMount(){
+        let currentComponent = this;
+        currentComponent.setState({
+            show: false
+        })
+    }
+
+    handleShow(): void {
+        let currentComponent = this;
+        currentComponent.setState({
+            show: true
+        })
+    }
+
+    handleHide(): void {
+        let currentComponent = this;
+        currentComponent.setState({
+            show: false
+        })
+    }
+
+    handleBack(): void {
         window.location.assign("/cats");
     }
 
@@ -52,7 +82,7 @@ class CatInformationView extends Component<IPropsCatInformationView> {
             <>
                 <button 
                     className="btn back-button" 
-                    onClick={this.handleBack}>
+                    onClick={() => this.handleBack()}>
                     Back
                 </button>
                 <div className={"cat-information"}>
@@ -75,9 +105,21 @@ class CatInformationView extends Component<IPropsCatInformationView> {
                             </div>
                             <button 
                                 className={`btn btn-custom ${genderBack}`}
-                                onClick={() => {}}>
+                                onClick={() => this.handleShow()}>
                                 Make an appointment to adopt
                             </button>
+                            <Modal
+                                show={this.state.show}
+                                onHide={() => this.handleHide()}
+                                backdrop="static"
+                                keyboard={false}>
+                                <Modal.Header closeButton>
+                                <Modal.Title>{"Appointment Request"}</Modal.Title>
+                                </Modal.Header>
+                                <Modal.Body>
+                                    {"test"}
+                                </Modal.Body>
+                            </Modal>
                         </div>
                     </div>
                 </div>
