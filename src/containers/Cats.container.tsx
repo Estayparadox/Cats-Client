@@ -30,7 +30,7 @@ class CatsContainer extends Component<IPropsCatsContainer, IStateCatsContainer> 
             isLoading: false,
             pageNumber: 1,
             catCount: 0,
-            maximumOfElementsToBeDisplay: 30,
+            maximumOfElementsToBeDisplay: 10,
             redirect: false,
             selectedCat: {
                 id: -1,

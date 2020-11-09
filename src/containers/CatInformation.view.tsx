@@ -3,7 +3,7 @@ import { ICat } from '../models/cat';
 import { Modal } from "react-bootstrap";
 import "../scss/containers/CatInformation.view.scss";
 import { postAppointment } from '../services/Appointment.service';
-import { getFormatedDate } from '../utils/date';
+import { getAgeFromBirthdate, getFormatedDate } from '../utils/date';
 
 interface IPropsCatInformationView {
     cat: ICat;
@@ -65,13 +65,6 @@ class CatInformationView extends Component<IPropsCatInformationView> {
         }
     }
 
-    getAgeFromBirthdate(birthdate: string): string {
-        var catBirthdate = new Date(birthdate);
-        let timeDiff = Math.abs(Date.now() - catBirthdate.getTime());
-        let age = Math.floor((timeDiff / (1000 * 3600 * 24))/365.25);
-        return `(` + age.toString() + `yo)`;
-    }
-
     getCssStyleForBackground(gender: string): string {
         switch (gender) {
             case "Male":
@@ -97,7 +90,7 @@ class CatInformationView extends Component<IPropsCatInformationView> {
     render(): JSX.Element {
         const genderBack = this.getCssStyleForBackground(this.props.cat.gender);
         const genderFront = this.getCssStyleForColor(this.props.cat.gender);
-        const age = this.getAgeFromBirthdate(this.props.cat.birthdate);
+        const age = getAgeFromBirthdate(this.props.cat.birthdate);
 
         return (
             <>
