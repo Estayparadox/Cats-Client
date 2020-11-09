@@ -1,15 +1,14 @@
 export async function postAppointment(catId: number): Promise<String | void> {
     var myHeaders = new Headers();
-    myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
+    myHeaders.append("Content-Type", "application/json");
 
-    var urlencoded = new URLSearchParams();
-    urlencoded.append("catId", JSON.stringify(catId));
+    var raw = JSON.stringify({"catId":Number(catId)});
 
     var requestOptions: RequestInit = {
-            method: 'POST',
-            headers: myHeaders,
-            body: urlencoded,
-            redirect: 'follow'
+        method: 'POST',
+        headers: myHeaders,
+        body: raw,
+        redirect: 'follow'
     };
 
     return fetch(`${process.env.REACT_APP_API_URL}/getAdoptionAppointment`, requestOptions)

@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { ICat } from '../models/cat';
 import { Modal } from "react-bootstrap";
 import "../scss/containers/CatInformation.view.scss";
+import { postAppointment } from '../services/Appointment.service';
+import { getFormatedDate } from '../utils/date';
 
 interface IPropsCatInformationView {
     cat: ICat;
@@ -9,7 +11,9 @@ interface IPropsCatInformationView {
 
 class CatInformationView extends Component<IPropsCatInformationView> {
     state = {
-        show: false
+        show: false,
+        bodyLine1: "",
+        bodyLine2: ""
     };
     
     constructor(props: IPropsCatInformationView) {
@@ -27,6 +31,7 @@ class CatInformationView extends Component<IPropsCatInformationView> {
     }
 
     handleShow(): void {
+        this.getAppointment();
         let currentComponent = this;
         currentComponent.setState({
             show: true
@@ -42,6 +47,22 @@ class CatInformationView extends Component<IPropsCatInformationView> {
 
     handleBack(): void {
         window.location.assign("/cats");
+    }
+
+    async getAppointment(): Promise<void> {
+        try {
+            const response = await postAppointment(this.props.cat.id);
+            const schedule = JSON.parse(response as string);
+            const formatedDate = getFormatedDate(new Date(schedule.appointment));
+            const bodyMessage1 = `Let's meet at "Paris Refuge" the ` + formatedDate
+            const bodyMessage2 = `to finalize ` + this.props.cat.name + `'s adoption.`
+            this.setState ({
+                bodyLine1: bodyMessage1,
+                bodyLine2: bodyMessage2
+            })
+        } catch (error) {
+            console.error("error", error);
+        }
     }
 
     getAgeFromBirthdate(birthdate: string): string {
@@ -117,7 +138,9 @@ class CatInformationView extends Component<IPropsCatInformationView> {
                                 <Modal.Title>{"Appointment Request"}</Modal.Title>
                                 </Modal.Header>
                                 <Modal.Body>
-                                    {"test"}
+                                    {"Thank you !"}<br/>
+                                    {this.state.bodyLine1}<br/>
+                                    {this.state.bodyLine2}
                                 </Modal.Body>
                             </Modal>
                         </div>
