@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import "../../scss/components/Loading.view.scss";
 
 interface IPropsLoadingComponent {
   isLoading: boolean;

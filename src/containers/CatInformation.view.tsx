@@ -4,6 +4,8 @@ import { Modal } from "react-bootstrap";
 import "../scss/containers/CatInformation.view.scss";
 import { postAppointment } from '../services/Appointment.service';
 import { getAgeFromBirthdate, getFormatedDate } from '../utils/date';
+import { JsxEmit } from 'typescript';
+import SpinnerComponent from '../components/Spinner/Spinner.component';
 
 interface IPropsCatInformationView {
     cat: ICat;
@@ -13,7 +15,8 @@ class CatInformationView extends Component<IPropsCatInformationView> {
     state = {
         show: false,
         bodyLine1: "",
-        bodyLine2: ""
+        bodyLine2: "",
+        isLoading: false
     };
     
     constructor(props: IPropsCatInformationView) {
@@ -50,6 +53,9 @@ class CatInformationView extends Component<IPropsCatInformationView> {
     }
 
     async getAppointment(): Promise<void> {
+        this.setState({
+            isLoading: true
+        })
         try {
             const response = await postAppointment(this.props.cat.id);
             const schedule = JSON.parse(response as string);
@@ -58,7 +64,8 @@ class CatInformationView extends Component<IPropsCatInformationView> {
             const bodyMessage2 = `to finalize ` + this.props.cat.name + `'s adoption.`
             this.setState ({
                 bodyLine1: bodyMessage1,
-                bodyLine2: bodyMessage2
+                bodyLine2: bodyMessage2,
+                isLoading: false
             })
         } catch (error) {
             console.error("error", error);
@@ -132,6 +139,7 @@ class CatInformationView extends Component<IPropsCatInformationView> {
                                 </Modal.Header>
                                 <Modal.Body>
                                     {"Thank you !"}<br/>
+                                    <SpinnerComponent isLoading={this.state.isLoading} />
                                     {this.state.bodyLine1}<br/>
                                     {this.state.bodyLine2}
                                 </Modal.Body>
