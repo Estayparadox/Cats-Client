@@ -11,7 +11,7 @@ export async function postAppointment(catId: number): Promise<String | void> {
         redirect: 'follow'
     };
 
-    return fetch(`${process.env.REACT_APP_API_URL}/getAdoptionAppointment`, requestOptions)
+    return fetch(`https://europe-west1-matters-test.cloudfunctions.net/getAdoptionAppointment`, requestOptions)
         .then(response => response.text())
         .then((responseData) => {
             return responseData;

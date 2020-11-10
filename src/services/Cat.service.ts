@@ -3,7 +3,7 @@ export async function getCats(): Promise<String | void> {
       method: 'GET',
       redirect: 'follow'
     };
-    return fetch(`${process.env.REACT_APP_API_URL}/getCats`, requestOptions)
+    return fetch(`https://europe-west1-matters-test.cloudfunctions.net/getCats`, requestOptions)
       .then(response => response.text())
       .then((responseData) => {
           return responseData;
