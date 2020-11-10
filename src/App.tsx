@@ -1,5 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Route } from "react-router-dom";
+import FooterComponent from './components/Footer/Footer.component';
 import HeaderComponent from './components/Header/Header.component';
 import CatInformationContainer from './containers/CatInformation.container';
 import CatsContainer from './containers/Cats.container';
@@ -16,6 +17,7 @@ function App() {
           <Route path='/information' render={ props => <CatInformationContainer {...props} />}
         />
       </Router>
+      <FooterComponent/>
     </div>
   );
 }

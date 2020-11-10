@@ -17,6 +17,7 @@
     "axios-request-handler": "^1.0.4",
     "bootstrap": "^4.5.3",
     "dotenv": "^8.2.0",
+    "mdbreact": "^4.27.0",
     "node-sass": "^4.12",
     "prop-types": "^15.7.2",
     "react": "^17.0.1",

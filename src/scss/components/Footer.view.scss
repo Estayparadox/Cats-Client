@@ -1,0 +1,9 @@
+@import "../constants/font.scss";
+@import "../constants/color.scss";
+
+.page-footer {
+    background-color: #f8f9fa!important;
+    .footer-copyright {
+        border-top: 1px solid #d6d6d6;
+    }
+}
