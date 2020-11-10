@@ -44,19 +44,6 @@ class CatsView extends Component<IPropsCatsView, IStateCatsView> {
                         cats={this.props.cats}
                         handleClickOnCat={this.props.handleClickOnCat}
                     />
-                    <PaginationComponent
-                        elementTypeName={{
-                            namePlural: "cats",
-                            nameSingular: "cat"
-                        }}
-                        handleClickNext={this.props.handleClickNext}
-                        handleClickPrevious={this.props.handleClickPrevious}
-                        numberOfElementsDisplayed={this.props.cats.length}
-                        pageNumber={this.props.pageNumber}
-                        totalNumberOfElements={this.props.catCount}
-                        maximumOfElementsToBeDisplay={this.props.maximumOfElementsToBeDisplay}
-                        isHiddenWhenNoElements={true}
-                    />
                 </div>
                 </LoadingComponent>
             </div>

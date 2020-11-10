@@ -74,6 +74,25 @@ class CatsContainer extends Component<IPropsCatsContainer, IStateCatsContainer> 
         }
     }
 
+    handleClickNext(): void {
+        const totalNumberOfElements = this.state.catCount;
+        // To be changed, numberOfElementsDisplayed has bad value
+        const numberOfElementsDisplayed = this.state.cats.length;
+        if ((this.state.pageNumber - 1) * 30 + numberOfElementsDisplayed < totalNumberOfElements) {
+            this.setState({
+                pageNumber: this.state.pageNumber + 1
+            }, () => this.fetchCats());
+        }
+    }
+    
+    handleClickPrevious(): void {
+        if (this.state.pageNumber > 1) {
+            this.setState({
+                pageNumber: this.state.pageNumber - 1
+            }, () => this.fetchCats());
+        }
+    }
+
     render(): JSX.Element {
         if (this.state.redirect) {
             return <Redirect to={{
@@ -86,8 +105,8 @@ class CatsContainer extends Component<IPropsCatsContainer, IStateCatsContainer> 
                 cats={this.state.cats}
                 handleClickOnCat={this.handleClickOnCat.bind(this)}
                 isLoading={this.state.isLoading}
-                handleClickNext={()=>{}}
-                handleClickPrevious={()=>{}}
+                handleClickNext={this.handleClickNext.bind(this)}
+                handleClickPrevious={this.handleClickPrevious.bind(this)}
                 pageNumber={this.state.pageNumber}
                 catCount={this.state.catCount}
                 maximumOfElementsToBeDisplay={this.state.maximumOfElementsToBeDisplay}
